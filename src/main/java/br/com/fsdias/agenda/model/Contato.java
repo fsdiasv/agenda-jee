@@ -2,6 +2,14 @@ package br.com.fsdias.agenda.model;
 
 import java.util.Calendar;
 
+/**
+ * Modelo do Contato
+ * 
+ * @author Felipe Dias
+ * 10 de set de 2016
+ *
+ */
+
 public class Contato {
 	private String nome;
 	private String endereco;

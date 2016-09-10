@@ -8,6 +8,6 @@ public interface IContatoDao {
 	public void insert(Contato c);
 	public void update(Contato c);
 	public void delete(int id);
-	public Contato search(Contato c);
+	public Contato search(int id);
 	public List<Contato> listAll();
 }
