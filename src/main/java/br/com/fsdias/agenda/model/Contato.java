@@ -11,11 +11,26 @@ import java.util.Calendar;
  */
 
 public class Contato {
+	private int id;
 	private String nome;
 	private String endereco;
 	private String email;
 	private Calendar data;
 
+	public Contato() {
+		this.id = 0;
+		this.nome = null;
+		this.endereco = null;
+		this.email = null;
+		this.data = null;
+	}
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getNome() {
 		return nome;
 	}

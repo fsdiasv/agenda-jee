@@ -56,7 +56,24 @@ public class ContatoDao implements IContatoDao {
 	 */
 	@Override
 	public void update(Contato c) {
-		// TODO Auto-generated method stub
+
+		String sql = "UPDATE contatos SET nome=?, endereco=?, email=? WHERE id=?";
+		
+		try {
+			PreparedStatement stmt = con.prepareStatement(sql);
+			
+			stmt.setString(1, c.getNome());
+			stmt.setString(2, c.getEndereco());
+			stmt.setString(3, c.getEmail());
+			stmt.setInt(4, c.getId());
+			
+			stmt.execute();
+			stmt.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
