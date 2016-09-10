@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class ConnectionFactory {
 	private String driver = "com.mysql.jdbc.Driver";
 	private String url = "jdbc:mysql://localhost/agenda-fj21";
-	private String user = "loot";
+	private String user = "root";
 	private String pass = "1234";
 	
 	public Connection getConnection() throws ClassNotFoundException {
