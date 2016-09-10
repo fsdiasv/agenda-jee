@@ -17,12 +17,31 @@ public class Contato {
 	private String email;
 	private Calendar data;
 
+	/**
+	 * Construtor padrão da classe Contato
+	 */
 	public Contato() {
 		this.id = 0;
 		this.nome = null;
 		this.endereco = null;
 		this.email = null;
 		this.data = null;
+	}
+	
+	/**
+	 * Construtor da classe Contato recebendo os parâmetros principais
+	 * 
+	 * @param nome
+	 * @param endereco
+	 * @param email
+	 * @param data
+	 */
+	public Contato(String nome, String endereco, String email, Calendar data) {
+		this.id = 0;
+		this.nome = nome;
+		this.endereco = endereco;
+		this.email = email;
+		this.data = data;
 	}
 	
 	public int getId() {

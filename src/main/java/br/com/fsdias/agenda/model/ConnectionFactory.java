@@ -10,16 +10,14 @@ public class ConnectionFactory {
 	private String user = "root";
 	private String pass = "1234";
 	
-	public Connection getConnection() {
+	public Connection getConnection() throws ClassNotFoundException {
 
-		try {
 			Class.forName(driver);
-			return DriverManager.getConnection(url, user, pass);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-		return null;
+
+			try {
+				return DriverManager.getConnection(url, user, pass);
+			} catch (SQLException e) {
+				throw new RuntimeException();
+			}
 	}
 }

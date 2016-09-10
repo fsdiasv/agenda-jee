@@ -23,7 +23,17 @@ public class ContatoDao implements IContatoDao {
 	/**
 	 * Atributo para conexão com o banco, gerado pela Factory
 	 */
-	private Connection con = new ConnectionFactory().getConnection();
+	private Connection con;
+	
+	public ContatoDao() {
+		try {
+			this.con = new ConnectionFactory().getConnection();
+		} catch (ClassNotFoundException e) {
+			System.out.println("Falha na conexão!");
+			e.printStackTrace();
+		}
+		
+	}
 
 	/**
 	 * Método responsável por <b>inserir</b> um Cliente no Banco de Dados
