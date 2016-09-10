@@ -85,7 +85,19 @@ public class ContatoDao implements IContatoDao {
 	 */
 	@Override
 	public void delete(int id) {
-		// TODO Auto-generated method stub
+		
+		String sql = "DELETE FROM contatos WHERE id=?";
+		
+		try {
+			PreparedStatement stmt = con.prepareStatement(sql);
+			
+			stmt.setInt(1, id);
+			
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 
