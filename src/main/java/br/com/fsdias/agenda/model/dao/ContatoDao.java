@@ -3,7 +3,10 @@ package br.com.fsdias.agenda.model.dao;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import br.com.fsdias.agenda.model.ConnectionFactory;
@@ -44,6 +47,7 @@ public class ContatoDao implements IContatoDao {
 			stmt.execute();
 			stmt.close();
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -96,6 +100,7 @@ public class ContatoDao implements IContatoDao {
 			stmt.execute();
 			stmt.close();
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -108,8 +113,36 @@ public class ContatoDao implements IContatoDao {
 	 * @return Contato - Retorna o contato buscado ou null se não encontrado
 	 */
 	@Override
-	public Contato search(int id) {
-		// TODO Auto-generated method stub
+	public Contato find(int id) {
+
+		String sql = "SELECT * FROM contatos WHERE id=?";
+		
+		try {
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setInt(1, id);
+			
+			Contato c = new Contato();
+			ResultSet rs = stmt.executeQuery();
+			
+			while (rs.next()) {
+				c.setId(rs.getInt("id"));
+				c.setNome(rs.getString("nome"));
+				c.setEmail(rs.getString("email"));
+				c.setEndereco(rs.getString("endereco"));
+
+				Calendar date = Calendar.getInstance();
+				date.setTime(rs.getDate("data"));
+				c.setData(date);
+			}
+			
+			stmt.close();
+			
+			return c;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
 
@@ -121,7 +154,38 @@ public class ContatoDao implements IContatoDao {
 	 */
 	@Override
 	public List<Contato> listAll() {
-		// TODO Auto-generated method stub
+
+		String sql = "SELECT * FROM contatos";
+		
+		try {
+			PreparedStatement stmt = con.prepareStatement(sql);
+			
+			ResultSet rs = stmt.executeQuery();
+			List<Contato> contatos = new ArrayList<Contato>();
+			
+			while (rs.next()) {
+				Contato c = new Contato();
+				
+				c.setId(rs.getInt("id"));
+				c.setNome(rs.getString("nome"));
+				c.setEmail(rs.getString("email"));
+				c.setEndereco(rs.getString("endereco"));
+
+				Calendar date = Calendar.getInstance();
+				date.setTime(rs.getDate("data"));
+				c.setData(date);
+				
+				contatos.add(c);
+			}
+			
+			stmt.close();
+			
+			return contatos;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
 

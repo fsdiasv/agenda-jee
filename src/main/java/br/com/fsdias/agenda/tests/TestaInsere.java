@@ -8,9 +8,9 @@ import br.com.fsdias.agenda.model.dao.ContatoDao;
 public class TestaInsere {
 	public static void main(String[] args) {
 		Contato c = new Contato();
-		c.setNome("Letícia Diniz");
-		c.setEndereco("Rua Sete de Setembro, 61");
-		c.setEmail("leticiadstu@gmail.com");
+		c.setNome("João da Silva");
+		c.setEndereco("Rua Tiradentes, 260");
+		c.setEmail("jaodasilva@gmail.com");
 		c.setData(Calendar.getInstance());
 		
 		ContatoDao contatoDao = new ContatoDao();
