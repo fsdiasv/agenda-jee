@@ -27,11 +27,29 @@ import br.com.fsdias.agenda.model.dao.ContatoDao;
 @WebServlet(urlPatterns={"/usuario.do", "/usuarioController"})
 public class ContatoServlet extends HttpServlet {
 
+	ContatoDao dao = new ContatoDao();
+	
 	@Override
 	protected void service(HttpServletRequest arg0, HttpServletResponse arg1) throws ServletException, IOException {
 		System.out.println("Requisição recebida!");
 		
 		super.service(arg0, arg1);
+	}
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String idStr = req.getParameter("id");
+		if (idStr != null && idStr != "") {
+			int id = Integer.parseInt(idStr);
+			dao.delete(id);
+			
+			//Auxilia no Forward, encaminhar o processamento do servlet para uma página jsp
+			RequestDispatcher dispatcher = req.getRequestDispatcher("/");
+			req.setAttribute("type", "delete");
+			req.setAttribute("msg", "Contato <b>removido</b> com sucesso!");
+			dispatcher.forward(req, resp);
+		}
+		
 	}
 	
 	@Override
@@ -61,14 +79,14 @@ public class ContatoServlet extends HttpServlet {
 		//Cria objeto Contato e instancia com os dados recebidos
 		Contato c = new Contato(nome, endereco, email, data);
 		
-		ContatoDao dao = new ContatoDao();
-		dao.insert(c);
+		this.dao.insert(c);
 
 		
 		//resp.sendRedirect("/");
 		//Auxilia no Forward, encaminhar o processamento do servlet para uma página jsp
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/");
-		req.setAttribute("msg", "Cadastrado efetuado com sucesso!");
+		req.setAttribute("type", "insert");
+		req.setAttribute("msg", "Contato <b>cadastrado</b> com sucesso!");
 		dispatcher.forward(req, resp);
 		
 	}

@@ -36,9 +36,13 @@
   		
   		<% 
   			Object msg = request.getAttribute("msg");
-  			if (msg != null) {
+  			Object type = request.getAttribute("type");
+  			if (msg != null && type == "insert") {
   				String msgString = (String)msg;
   				out.print("<div class=\"alert alert-success text-center\" role=\"alert\">" + msgString + "</div>");
+  			} else if (msg != null && type == "delete") {
+  				String msgString = (String)msg;
+  				out.print("<div class=\"alert alert-danger text-center\" role=\"alert\">" + msgString + "</div>");
   			}
   		%>
   		
@@ -76,7 +80,8 @@
 					<td><%out.print(c.getEmail());%></td>
 					<td><%out.print(c.getEndereco());%></td>
 					<td><%--out.print(c.getData());--%></td>
-					<td><input type="submit" class="btn btn-info" value="Editar"> <input type="submit" class="btn btn-danger" value="Remover"></td>
+					<td><% out.print("<td><a href=\"usuario.do?id=" + c.getId() + "\"><button type=\"button\" class=\"btn btn-info\">Editar</button></a>"); %>
+						<% out.print("<a href=\"usuario.do?id=" + c.getId() + "\"><button type=\"button\" class=\"btn btn-danger\">Remover</button></a></td>"); %>
 				</tr>
 				<% } %>
 			</tbody>
