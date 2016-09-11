@@ -34,12 +34,24 @@
   		<h1 class="text-center" style="margin-top: 100px"><% out.print(cabecalho); %></h1>
   		<h4 class="text-center"><% out.print(subtitulo); %></h4>
   		
+  		<% 
+  			Object msg = request.getAttribute("msg");
+  			if (msg != null) {
+  				String msgString = (String)msg;
+  				out.print("<div class=\"alert alert-success text-center\" role=\"alert\">" + msgString + "</div>");
+  			}
+  		%>
+  		
 		<% 
   			ContatoDao dao = new ContatoDao();
   			List<Contato> contatos = dao.listAll();
   			
   		%>
-		<div class="panel panel-default" style="margin-top: 80px;">
+  		
+  		<form method="get" action="cadastro.jsp"> 
+  			<input type="submit" class="btn btn-success" style="margin-top: 30px;" value="Cadastrar Novo Contato"> 
+  		</form>
+		<div class="panel panel-default" style="margin-top: 40px;">
 		  <!-- Default panel contents -->
 		  <div class="panel-heading">Contatos cadastrados</div>
 		
@@ -64,7 +76,7 @@
 					<td><%out.print(c.getEmail());%></td>
 					<td><%out.print(c.getEndereco());%></td>
 					<td><%--out.print(c.getData());--%></td>
-					<td></td>
+					<td><input type="submit" class="btn btn-info" value="Editar"> <input type="submit" class="btn btn-danger" value="Remover"></td>
 				</tr>
 				<% } %>
 			</tbody>

@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -62,8 +63,13 @@ public class ContatoServlet extends HttpServlet {
 		
 		ContatoDao dao = new ContatoDao();
 		dao.insert(c);
+
 		
-		out.println("Contato <b>" + c.getNome() + "</b> adicionado com sucesso!");
+		//resp.sendRedirect("/");
+		//Auxilia no Forward, encaminhar o processamento do servlet para uma página jsp
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/");
+		req.setAttribute("msg", "Cadastrado efetuado com sucesso!");
+		dispatcher.forward(req, resp);
 		
 	}
 }
